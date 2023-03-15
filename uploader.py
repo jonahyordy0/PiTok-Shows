@@ -3,7 +3,7 @@ import pyautogui
 import webbrowser
 import time
 import pyperclip
-
+#penis
 
 url = 'https://www.tiktok.com/upload?lang=en'
 clipsloc = r'home/jonah/Desktop/tt/ '
