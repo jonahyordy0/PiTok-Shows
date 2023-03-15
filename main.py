@@ -39,7 +39,7 @@ elif drives[0] == "RNM":
             cur_video.create_next_clip(clip_len)
             upload(cname, 2)
             cur_video.update_info(cur_video.start)
-            time.sleep(4000 + random.randint(0, 600))
+            time.sleep(6000 + random.randint(0, 600))
 
         cur_video.destroy()
         time.sleep(10)
