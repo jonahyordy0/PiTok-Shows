@@ -33,6 +33,7 @@ elif drives[0] == "RNM":
                 pickle.dump(0, f)
 
         cur_video = TikVideo('curClip.mp4', cname)
+        print(cur_video.start)
         
         while not cur_video.is_over():
             cur_video.create_next_clip(clip_len)

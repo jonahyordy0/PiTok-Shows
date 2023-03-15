@@ -16,6 +16,7 @@ def upload(filename, account):
     
     print(account)
     
+    time.sleep(5)
     os.system('chromium-browser tiktok.com/upload --profile-directory="Profile ' + str(account) +'" &')
     time.sleep(20)
     for i in range(5): # Open Upload Prompt
