@@ -4,4 +4,4 @@ sleep 1
 
 exec gnome-session &
 
-nohup python main.py &
+nohup python -u main.py &

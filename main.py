@@ -13,6 +13,7 @@ from uploader import upload
 
 while True:
     drives = os.listdir("/media/"+ os.getlogin() +"/")
+    print(drives)
     if len(drives) == 0:
         print("No drives detected")
 
