@@ -5,7 +5,7 @@ import time
 import pyperclip
 
 url = 'https://www.tiktok.com/upload?lang=en'
-clipsloc = r'home/jonah/Desktop/tt/ '
+clipsloc = r'home/' + os.getlogin() +'/Desktop/tt/ '
 
 def upload(filename, account):
     os.system("killall chromium-browser")
