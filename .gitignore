@@ -2,4 +2,5 @@
 *.pkl
 *.mp3
 *.out
-**/__pycache__/
+ __pycache__/
+ *.pyc

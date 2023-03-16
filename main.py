@@ -26,7 +26,7 @@ posting_times = {
         [3,0],
         [4,0],
         [5,0],
-        [8,0]
+        [8,0],
         [9,0],
         [10,0],
         [12,0]
@@ -37,10 +37,10 @@ posting_times = {
         [7,0],
         [8,0],
         [9,0],
-        [13,0]
+        [13,0],
         [22,0],
         [23,0],
-        [24,0],
+        [24,0]
     ],
     3:[
         [9,0],
@@ -63,7 +63,7 @@ posting_times = {
         [21,0]
     ],
     5:[
-        [7,0]
+        [7,0],
         [11,0],
         [12,0],
         [13,0],
@@ -141,6 +141,7 @@ while True:
             
             while not cur_video.is_over():
                 time_now = datetime.datetime.now()
+                print(time_now)
                 if [time_now.hour, time_now.minute] in posting_times[time_now.weekday()]:
                     print("Posting...")
                     cur_video.create_next_clip(clip_len)
