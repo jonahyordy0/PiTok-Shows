@@ -5,6 +5,7 @@ from srnm import TikVideo
 #import ssp
 
 import random
+import datetime
 import time
 import shutil
 import pickle
@@ -21,9 +22,12 @@ posting_times = {
     6:[]
 }
 
+post_interval = 8000
+
 
 while True:
     drives = os.listdir("/media/"+ os.getlogin() +"/")
+    print(drives)
     if len(drives) == 0:
         print("No drives detected")
 
@@ -48,7 +52,11 @@ while True:
                 cur_video.create_next_clip(clip_len)
                 upload(cname, 3)
                 cur_video.update_info(cur_video.start)
+<<<<<<< HEAD
                 #time.sleep(6000 + random.randint(0, 600))
+=======
+                time.sleep(post_interval + random.randint(0, 600))
+>>>>>>> 66087170862dbe30782d31b09fb689c9f70d1ed0
 
             cur_video.destroy()
             time.sleep(10)
@@ -75,12 +83,19 @@ while True:
             print(cur_video.start)
             
             while not cur_video.is_over():
+<<<<<<< HEAD
                 time_now = datetime.datetime.now()
                 if [time_now.hour, time_now.minute] in posting_times[time_now.weekday()]:
                     cur_video.create_next_clip(clip_len)
                     upload(cname, 2)
                     cur_video.update_info(cur_video.start)
                     #time.sleep(6000 + random.randint(0, 600))
+=======
+                cur_video.create_next_clip(clip_len)
+                upload(cname, 2)
+                cur_video.update_info(cur_video.start)
+                time.sleep(post_interval + random.randint(0, 600))
+>>>>>>> 66087170862dbe30782d31b09fb689c9f70d1ed0
 
             cur_video.destroy()
             time.sleep(10)
