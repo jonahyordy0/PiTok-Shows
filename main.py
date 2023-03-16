@@ -93,13 +93,12 @@ while True:
         print("No drives detected")
 
     elif drives[0] == "SOUTHPARK":
-        clip_len = 44
+        clip_len = 50
         vname = "curClip.mp4"
         cname = "#cartman #southpark #foryou #fyp #kenny #kyle #game.mp4"
         videos_folder = os.listdir("/media/"+ os.getlogin() +"/SOUTHPARK/videos")
 
         while len(videos_folder) > 0:
-            videos_folder = os.listdir("/media/"+ os.getlogin() +"/SOUTHPARK/videos")
             if not os.path.isfile(vname):
                 cur_file = videos_folder[0]
                 shutil.move("/media/"+ os.getlogin() +"/SOUTHPARK/videos/" + cur_file, "./" + vname)
@@ -109,13 +108,25 @@ while True:
             cur_video = TikVideo(vname, cname)
             print(cur_video.start)
             
+            # Continue posting clips until entire video is posted
             while not cur_video.is_over():
-                cur_video.create_next_clip(clip_len)
-                upload(cname, 3)
-                cur_video.update_info(cur_video.start)
-                #time.sleep(post_interval + random.randint(0, 600))
+                # Get the current time to check if it is time to post
+                time_now = datetime.datetime.now()
+                print(time_now)
 
+                if [time_now.hour, time_now.minute] in posting_times[time_now.weekday()]:
+                    print("Posting...")
+                    # Create next clip and upload
+                    cur_video.create_next_clip(clip_len)
+                    upload(cname, 2)
+                    # Set new start point for next clip
+                    cur_video.update_info(cur_video.start)
+                    #time.sleep(post_interval + random.randint(0, 600))
+                time.sleep(15)
+
+            # Delete local video file and destroy movie py objects to free up memory
             cur_video.destroy()
+            videos_folder = os.listdir("/media/"+ os.getlogin() +"/SOUTHPARK/videos")
             time.sleep(10)
             
     elif drives[0] == "YOUTUBE":
@@ -124,7 +135,7 @@ while True:
 
     elif drives[0] == "RNM":
         # Set constants for rick and morty account
-        clip_len = 46
+        clip_len = 50
         vname = "curClip.mp4"
         cname = "#rick #rickandmorty #foryou #fyp #morty #movie #game #❤️❤️.mp4"
 
