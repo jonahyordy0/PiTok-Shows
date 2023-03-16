@@ -9,6 +9,17 @@ import time
 import shutil
 import pickle
 from uploader import upload
+import datetime
+
+posting_times = {
+    0:[],
+    1:[],
+    2:[],
+    3:[],
+    4:[],
+    5:[],
+    6:[]
+}
 
 
 while True:
@@ -37,7 +48,7 @@ while True:
                 cur_video.create_next_clip(clip_len)
                 upload(cname, 3)
                 cur_video.update_info(cur_video.start)
-                time.sleep(6000 + random.randint(0, 600))
+                #time.sleep(6000 + random.randint(0, 600))
 
             cur_video.destroy()
             time.sleep(10)
@@ -64,10 +75,12 @@ while True:
             print(cur_video.start)
             
             while not cur_video.is_over():
-                cur_video.create_next_clip(clip_len)
-                upload(cname, 2)
-                cur_video.update_info(cur_video.start)
-                time.sleep(6000 + random.randint(0, 600))
+                time_now = datetime.datetime.now()
+                if [time_now.hour, time_now.minute] in posting_times[time_now.weekday()]:
+                    cur_video.create_next_clip(clip_len)
+                    upload(cname, 2)
+                    cur_video.update_info(cur_video.start)
+                    #time.sleep(6000 + random.randint(0, 600))
 
             cur_video.destroy()
             time.sleep(10)
