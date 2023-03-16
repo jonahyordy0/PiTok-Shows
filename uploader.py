@@ -8,34 +8,40 @@ url = 'https://www.tiktok.com/upload?lang=en'
 clipsloc = r'home/' + os.getlogin() +'/Desktop/tt/ '
 
 def upload(filename, account):
+    # Make sure no chrome browser already exists
     os.system("killall chromium-browser")
     time.sleep(2)
+
+    # Print display size to ensure using virtual display
     sW, sH = pyautogui.size()
     print(sW,sH)
-    
+
     print(account)
     
-    time.sleep(5)
+    # Open chrome to current profile
     os.system('chromium-browser tiktok.com/upload --profile-directory="Profile ' + str(account) +'" &')
     time.sleep(20)
-    for i in range(5): # Open Upload Prompt
+    # Open Upload Prompt
+    for i in range(5):
         pyautogui.press('tab')
         time.sleep(1)
     pyautogui.press('enter')
     time.sleep(3)
     print(clipsloc+filename)
+
+    # Type in file location
     pyautogui.press('/')
     pyperclip.copy(clipsloc+filename)
     time.sleep(3)
     pyautogui.hotkey("ctrl", "v")
     time.sleep(3)
+
+    # Upload to file input
     pyautogui.press('enter')
-    time.sleep(2)
-    print("loading")
     time.sleep(120)
 
+    # Check if upload was successful
     pyautogui.hotkey('shift', 'tab')
-    print("okay")
     time.sleep(3)
     pyautogui.moveTo(sW*0.475,sH*0.475)
     time.sleep(3)
@@ -44,7 +50,6 @@ def upload(filename, account):
     
     if t is not None:
         print("Upload Success")
-        # Upload Video
         pyautogui.press('enter')
         time.sleep(15)
         os.system("killall chromium-browser")
