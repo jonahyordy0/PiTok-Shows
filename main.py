@@ -1,8 +1,6 @@
 import os
 
-#import syoutube
 from srnm import TikVideo
-#import ssp
 
 import random
 import datetime
@@ -144,6 +142,7 @@ while True:
             while not cur_video.is_over():
                 time_now = datetime.datetime.now()
                 if [time_now.hour, time_now.minute] in posting_times[time_now.weekday()]:
+                    print("Posting...")
                     cur_video.create_next_clip(clip_len)
                     upload(cname, 2)
                     cur_video.update_info(cur_video.start)

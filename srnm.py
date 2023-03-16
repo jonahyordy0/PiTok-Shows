@@ -52,6 +52,7 @@ class TikVideo:
 
         video.write_videofile(self.clip_name, preset="ultrafast")
         video.close()
+        gp.close()
 
     
     def update_info(self, start):
