@@ -5,10 +5,13 @@ from srnm import TikVideo
 #import ssp
 
 import random
+import datetime
 import time
 import shutil
 import pickle
 from uploader import upload
+
+post_interval = 8000
 
 
 while True:
@@ -38,7 +41,7 @@ while True:
                 cur_video.create_next_clip(clip_len)
                 upload(cname, 3)
                 cur_video.update_info(cur_video.start)
-                time.sleep(6000 + random.randint(0, 600))
+                time.sleep(post_interval + random.randint(0, 600))
 
             cur_video.destroy()
             time.sleep(10)
@@ -68,7 +71,7 @@ while True:
                 cur_video.create_next_clip(clip_len)
                 upload(cname, 2)
                 cur_video.update_info(cur_video.start)
-                time.sleep(6000 + random.randint(0, 600))
+                time.sleep(post_interval + random.randint(0, 600))
 
             cur_video.destroy()
             time.sleep(10)
