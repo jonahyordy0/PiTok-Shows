@@ -118,7 +118,7 @@ while True:
                     print("Posting...")
                     # Create next clip and upload
                     cur_video.create_next_clip(clip_len)
-                    upload(cname, 2)
+                    upload(cname, 3)
                     # Set new start point for next clip
                     cur_video.update_info(cur_video.start)
                     #time.sleep(post_interval + random.randint(0, 600))
