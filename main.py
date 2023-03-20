@@ -94,7 +94,7 @@ while True:
 
     elif drives[0] == "SOUTHPARK":
         clip_len = 63
-        vname = "curClip.mp4"
+        vname = "curSouth.mp4"
         cname = "#cartman #southpark #foryou #fyp #kenny #kyle #game.mp4"
         videos_folder = os.listdir("/media/"+ os.getlogin() +"/"+drives[0]+"/videos")
 
@@ -132,7 +132,7 @@ while True:
     elif drives[0] == "YOUTUBE":
         clip_len = 65
         cname = "#youtube #youtubeclips #foryou #fyp #trending #movie #game #viral.mp4"
-        vname = "curClip.mp4"
+        vname = "curYou.mp4"
 
         videos_folder = os.listdir("/media/"+ os.getlogin() +"/"+drives[0]+"/videos")
 
@@ -142,7 +142,7 @@ while True:
             if not os.path.isfile(vname):
                 # Move new video from drive to local folder saved as name (vname)
                 cur_file = videos_folder[0]
-                shutil.move("/media/"+ os.getlogin() +"/"+drives[0]+"videos/" + cur_file, "./" + vname)
+                shutil.move("/media/"+ os.getlogin() +"/"+drives[0]+"/videos/" + cur_file, "./" + vname)
                 
                 # Reset pickle file
                 with open("info.pkl", "wb") as f:
@@ -176,7 +176,7 @@ while True:
     elif drives[0] == "RNM":
         # Set constants for rick and morty account
         clip_len = 59
-        vname = "curClip.mp4"
+        vname = "curRNM.mp4"
         cname = "#rick #rickandmorty #foryou #fyp #morty #movie #game #❤️❤️.mp4"
 
         videos_folder = os.listdir("/media/"+ os.getlogin() +"/"+drives[0]+"/videos")
@@ -187,7 +187,7 @@ while True:
             if not os.path.isfile(vname):
                 # Move new video from drive to local folder saved as name (vname)
                 cur_file = videos_folder[0]
-                shutil.move("/media/"+ os.getlogin() +"/"+drives[0]+"videos/" + cur_file, "./" + vname)
+                shutil.move("/media/"+ os.getlogin() +"/"+drives[0]+"/videos/" + cur_file, "./" + vname)
                 
                 # Reset pickle file
                 with open("info.pkl", "wb") as f:
