@@ -98,7 +98,7 @@ while True:
         cname = "#cartman #southpark #foryou #fyp #kenny #kyle #game.mp4"
         videos_folder = os.listdir("/media/"+ os.getlogin() +"/"+drives[0]+"/videos")
 
-        while len(videos_folder) > 0:
+        while len(videos_folder) > 0 or os.path.isfile(vname):
             if not os.path.isfile(vname):
                 cur_file = videos_folder[0]
                 shutil.move("/media/"+ os.getlogin() +"/"+drives[0]+"/videos/" + cur_file, "./" + vname)
@@ -137,7 +137,7 @@ while True:
         videos_folder = os.listdir("/media/"+ os.getlogin() +"/"+drives[0]+"/videos")
 
         # Loop through all videos on drive
-        while len(videos_folder) > 0:
+        while len(videos_folder) > 0 or os.path.isfile(vname):
             # Check if we are already editing a video
             if not os.path.isfile(vname):
                 # Move new video from drive to local folder saved as name (vname)
@@ -182,7 +182,7 @@ while True:
         videos_folder = os.listdir("/media/"+ os.getlogin() +"/"+drives[0]+"/videos")
 
         # Loop through all videos on drive
-        while len(videos_folder) > 0:
+        while len(videos_folder) > 0 or os.path.isfile(vname):
             # Check if we are already editing a video
             if not os.path.isfile(vname):
                 # Move new video from drive to local folder saved as name (vname)
