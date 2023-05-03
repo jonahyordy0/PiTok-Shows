@@ -58,7 +58,7 @@ while True:
 
     elif drives[0] == "RNM":
         # Set constants for rick and morty account
-        clip_len = 59
+        clip_len = 65
         vname = "curClip.mp4"
         cname = "#rick #rickandmorty #foryou #fyp #morty #movie #game #❤️❤️.mp4"
 

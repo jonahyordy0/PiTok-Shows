@@ -39,6 +39,7 @@ class TikVideo:
     def create_next_clip(self, clip_len):
         gp_folder = os.listdir("gameplay")
         random.shuffle(gp_folder)
+        clip_len += random.randint(0,20)
 
         # Gameplay variables
         gp_num = 0
@@ -73,7 +74,7 @@ class TikVideo:
             c.close()
         
         # Load PIL Part Image
-        part_duration = 5
+        part_duration = clip.duration
         part_image = ImageClip(create_part_image(self.part), duration=part_duration).margin(top=clip.h, opacity=0)
 
         # Build our main clip
@@ -82,7 +83,7 @@ class TikVideo:
         self.part += 1
         
         # Save as new clip overwritting last one
-        video.write_videofile(self.clip_name, preset="ultrafast", threads=6, fps=30)
+        video.write_videofile(self.clip_name, preset="ultrafast", fps=30)
 
         # Close moviepy VideoClip objects to free up memory
         video.close()
