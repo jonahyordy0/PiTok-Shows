@@ -92,8 +92,8 @@ while True:
                     cur_video.create_next_clip(clip_len)
                     upload(cname, 2)
                     # Set new start point for next clip
-                    cur_video.update_info(cur_video.start)
-                    #time.sleep(post_interval + random.randint(0, 600))
+                    cur_video.update_info()
+
                 time.sleep(15)
 
             # Delete local video file and destroy movie py objects to free up memory
