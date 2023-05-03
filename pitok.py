@@ -74,7 +74,7 @@ class TikVideo:
             c.close()
         
         # Load PIL Part Image
-        part_duration = clip.duration
+        part_duration = 8
         part_image = ImageClip(create_part_image(self.part), duration=part_duration).margin(top=clip.h, opacity=0)
 
         # Build our main clip

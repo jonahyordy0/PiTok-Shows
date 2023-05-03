@@ -70,11 +70,11 @@ while True:
             if not os.path.isfile(vname):
                 # Move new video from drive to local folder saved as name (vname)
                 cur_file = videos_folder[0]
-                shutil.move("/media/"+ os.getlogin() +"/"+drives[0]+"videos/" + cur_file, "./" + vname)
+                shutil.move("/media/"+ os.getlogin() +"/"+drives[0]+"/videos/" + cur_file, "./" + vname)
                 
                 # Reset pickle file
                 with open("info.pkl", "wb") as f:
-                    pickle.dump(0, f)
+                    pickle.dump([0, 1], f)
 
             # Init tik tok video object
             cur_video = TikVideo(vname, cname)
