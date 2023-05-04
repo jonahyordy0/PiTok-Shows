@@ -1,3 +1,5 @@
 import pickle
-with open("info.pkl", "wb") as f:
-    pickle.dump([0, 1], f)
+
+with open('info.pkl', 'rb') as f:
+    i = pickle.load(f)
+    print(i)

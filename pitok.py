@@ -2,15 +2,18 @@ import random
 import os
 import time
 import pickle
+import moviepy.audio
 
 from moviepy.editor import *
 from moviepy.video.fx.all import crop
+from moviepy.audio.fx.volumex import volumex
 
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
 import numpy as np
+import asyncio
 
 def create_part_image(part_num):
     text = f'Part {part_num}'
@@ -37,6 +40,8 @@ class TikVideo:
         self.clip_name = clip_name
 
     def create_next_clip(self, clip_len):
+        clip = VideoFileClip(self.loc)
+
         gp_folder = os.listdir("gameplay")
         random.shuffle(gp_folder)
         clip_len += random.randint(0,20)
@@ -48,10 +53,10 @@ class TikVideo:
         
         # Check if clip is nearing end so last clip isn't only a few seconds long
         if self.duration < (self.start + clip_len + 20):
-            clip = self.clip.subclip(self.start, self.duration).resize(width=720).margin(top=100)
+            clip = clip.subclip(self.start, self.duration).resize(width=720).margin(top=100).afx(volumex, 10)
         else:
-            clip = self.clip.subclip(self.start, self.start + clip_len).resize(width=720).margin(top=100)
-        
+            clip = clip.subclip(self.start, self.start + clip_len).resize(width=720).margin(top=100).afx(volumex, 10)
+
         # Build gameplay same length as our clip
         while gp_dur < clip.duration:
             temp_clip = VideoFileClip("gameplay/" +gp_folder[gp_num]).without_audio()
@@ -62,17 +67,13 @@ class TikVideo:
             gp_dur += temp_clip.duration
             gp_clips.append(temp_clip)
             gp_num+=1
-            temp_clip.close()
+            
 
         # Chop access gameplay and combine
         gp_clips[-1] = gp_clips[-1].subclip(0, gp_clips[-1].duration - (gp_dur - clip.duration))
         gp_dur -= clip.duration
         gp = concatenate_videoclips(gp_clips)
 
-        # Close indivdual gameplay clips
-        for c in gp_clips:
-            c.close()
-        
         # Load PIL Part Image
         part_duration = 8
         part_image = ImageClip(create_part_image(self.part), duration=part_duration).margin(top=clip.h, opacity=0)
@@ -89,6 +90,12 @@ class TikVideo:
         video.close()
         gp.close()
         clip.close()
+        temp_clip.close()
+        part_image.close()
+
+        # Close indivdual gameplay clips
+        for c in gp_clips:
+            c.close()
 
     
     def update_info(self):
