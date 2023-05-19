@@ -13,7 +13,6 @@ from PIL import ImageDraw
 from PIL import ImageFont
 
 import numpy as np
-import asyncio
 
 def create_part_image(part_num):
     text = f'Part {part_num}'
@@ -45,6 +44,7 @@ class TikVideo:
         gp_folder = os.listdir("gameplay")
         random.shuffle(gp_folder)
         clip_len += random.randint(0,20)
+        top_margin = 200
 
         # Gameplay variables
         gp_num = 0
@@ -53,16 +53,16 @@ class TikVideo:
         
         # Check if clip is nearing end so last clip isn't only a few seconds long
         if self.duration < (self.start + clip_len + 20):
-            clip = clip.subclip(self.start, self.duration).resize(width=720).margin(top=100).afx(volumex, 10)
+            clip = clip.subclip(self.start, self.duration).resize(width=720).margin(top=top_margin).afx(volumex, 10)
         else:
-            clip = clip.subclip(self.start, self.start + clip_len).resize(width=720).margin(top=100).afx(volumex, 10)
+            clip = clip.subclip(self.start, self.start + clip_len).resize(width=720).margin(top=top_margin).afx(volumex, 10)
 
         # Build gameplay same length as our clip
         while gp_dur < clip.duration:
             temp_clip = VideoFileClip("gameplay/" +gp_folder[gp_num]).without_audio()
             (w, h) = temp_clip.size
-            temp_clip = crop(temp_clip, height=h - 100,y_center=h/2 - 50)
-            temp_clip = temp_clip.margin(top=100)
+            temp_clip = crop(temp_clip, height=h - top_margin,y_center=h/2 - 50)
+            temp_clip = temp_clip.margin(top=top_margin)
 
             gp_dur += temp_clip.duration
             gp_clips.append(temp_clip)
@@ -79,7 +79,7 @@ class TikVideo:
         part_image = ImageClip(create_part_image(self.part), duration=part_duration).margin(top=clip.h, opacity=0)
 
         # Build our main clip
-        video = CompositeVideoClip([gp,clip.set_position(("center","top")), part_image])
+        video = CompositeVideoClip([gp,clip.set_position(("center","top")), part_image.set_position(("center", "top"))])
         self.start += video.duration
         self.part += 1
         
