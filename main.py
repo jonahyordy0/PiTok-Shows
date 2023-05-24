@@ -14,38 +14,59 @@ posting_times = {
     0:[ # Monday
         [6,0],
         [10,0],
-        [22,0]
+        [22,0],
+
+        [13,0],
+        [18,0]
     ],
     1:[ # Tuesday
         [2,0],
         [4,0],
-        [9,0]
+        [9,0],
+
+        [14,0],
+        [20,0]
 
     ],
     2:[ # Wednesday
         [7,0],
         [8,0],
-        [23,0]
+        [23,0],
+
+        [13,0],
+        [18,0]
     ],
     3:[ # Thursday
         [9,0],
         [12,0],
-        [19,0]
+        [19,0],
+
+        [23,0],
+        [20,0]
     ],
     4:[ # Friday
         [5,0],
         [13,0],
-        [15,0]
+        [15,0],
+
+        [9,0],
+        [23,0]
     ],
     5:[ # Saturday
         [11,0],
         [19,0],
-        [20,0]
+        [20,0],
+
+        [15,0],
+        [6,0]
     ],
     6:[ #Sunday
         [7,0],
         [8,0],
-        [16,0]
+        [16,0],
+
+        [22,0],
+        [12,0]
     ]
 }
 
@@ -60,7 +81,8 @@ while True:
         # Set constants for rick and morty account
         clip_len = 65
         vname = "curClip.mp4"
-        cname = "#rick #rickandmorty #foryou #fyp #morty #movie #game #❤️❤️.mp4"
+        #cname = "#rick #rickandmorty #foryou #fyp #morty #movie #game #❤️❤️.mp4"
+        cname = "#fypシ #tiktok #viral #gameplay #mobilegame #rickandmorty #rick #morty.mp4"
 
         videos_folder = os.listdir("/media/"+ os.getlogin() +"/"+drives[0]+"/videos")
 
@@ -71,7 +93,7 @@ while True:
                 # Move new video from drive to local folder saved as name (vname)
                 cur_file = videos_folder[0]
                 shutil.move("/media/"+ os.getlogin() +"/"+drives[0]+"/videos/" + cur_file, "./" + vname)
-                
+
                 # Reset pickle file
                 with open("info.pkl", "wb") as f:
                     pickle.dump([0, 1], f)
@@ -79,7 +101,7 @@ while True:
             # Init tik tok video object
             cur_video = TikVideo(vname, cname)
             print(cur_video.start)
-            
+
             # Continue posting clips until entire video is posted
             while not cur_video.is_over():
                 # Get the current time to check if it is time to post
