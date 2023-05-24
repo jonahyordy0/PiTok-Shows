@@ -2,7 +2,6 @@ import random
 import os
 import time
 import pickle
-import moviepy.audio
 
 from moviepy.editor import *
 from moviepy.video.fx.all import crop
@@ -17,7 +16,7 @@ import numpy as np
 def create_part_image(part_num):
     text = f'Part {part_num}'
 
-    font = ImageFont.truetype("font.ttf", size=90)
+    font = ImageFont.truetype("font.ttf", size=60)
     w, h = font.getsize(text)
 
     img = Image.new('RGB', (w+30, h+30), (255, 255, 255))
@@ -40,17 +39,16 @@ class TikVideo:
 
     def create_next_clip(self, clip_len):
         clip = VideoFileClip(self.loc)
-
         gp_folder = os.listdir("gameplay")
         random.shuffle(gp_folder)
         clip_len += random.randint(0,20)
-        top_margin = 200
+        top_margin = 100
 
         # Gameplay variables
         gp_num = 0
         gp_dur = 0
         gp_clips = []
-        
+
         # Check if clip is nearing end so last clip isn't only a few seconds long
         if self.duration < (self.start + clip_len + 20):
             clip = clip.subclip(self.start, self.duration).resize(width=720).margin(top=top_margin).afx(volumex, 10)
@@ -67,22 +65,20 @@ class TikVideo:
             gp_dur += temp_clip.duration
             gp_clips.append(temp_clip)
             gp_num+=1
-            
 
         # Chop access gameplay and combine
         gp_clips[-1] = gp_clips[-1].subclip(0, gp_clips[-1].duration - (gp_dur - clip.duration))
         gp_dur -= clip.duration
         gp = concatenate_videoclips(gp_clips)
-
         # Load PIL Part Image
-        part_duration = 8
+        part_duration = 7
         part_image = ImageClip(create_part_image(self.part), duration=part_duration).margin(top=clip.h, opacity=0)
 
         # Build our main clip
         video = CompositeVideoClip([gp,clip.set_position(("center","top")), part_image.set_position(("center", "top"))])
         self.start += video.duration
         self.part += 1
-        
+
         # Save as new clip overwritting last one
         video.write_videofile(self.clip_name, preset="ultrafast", fps=30)
 
@@ -97,7 +93,7 @@ class TikVideo:
         for c in gp_clips:
             c.close()
 
-    
+
     def update_info(self):
         # Save new start and part value
         with open('info.pkl', 'wb') as f:
@@ -106,7 +102,7 @@ class TikVideo:
     def is_over(self):
         # Check if the current video is over
         return self.start >= self.duration
-    
+
     def destroy(self):
         # Clear up memory
         os.remove(self.loc)
