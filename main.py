@@ -77,12 +77,11 @@ while True:
         print("No drives detected")
 
 
-    elif drives[0] == "RNM":
+    elif drives[0] == "SOUTH":
         # Set constants for rick and morty account
         clip_len = 65
         vname = "curClip.mp4"
-        #cname = "#rick #rickandmorty #foryou #fyp #morty #movie #game #❤️❤️.mp4"
-        cname = "#fypシ #tiktok #viral #gameplay #mobilegame #rickandmorty #rick #morty.mp4"
+        cname = "#southpark #game #foryou #funny #cartoon.mp4"
 
         videos_folder = os.listdir("/media/"+ os.getlogin() +"/"+drives[0]+"/videos")
 

@@ -42,7 +42,8 @@ class TikVideo:
         gp_folder = os.listdir("gameplay")
         random.shuffle(gp_folder)
         clip_len += random.randint(0,20)
-        top_margin = 200
+        TOP_MARGIN = 200
+        VOLUME = 10
 
         # Gameplay variables
         gp_num = 0
@@ -51,9 +52,9 @@ class TikVideo:
 
         # Check if clip is nearing end so last clip isn't only a few seconds long
         if self.duration < (self.start + clip_len + 20):
-            clip = clip.subclip(self.start, self.duration).resize(width=720).margin(top=top_margin).afx(volumex, 15)
+            clip = clip.subclip(self.start, self.duration).resize(width=720).margin(top=top_margin).afx(volumex, VOLUME)
         else:
-            clip = clip.subclip(self.start, self.start + clip_len).resize(width=720).margin(top=top_margin).afx(volumex, 15)
+            clip = clip.subclip(self.start, self.start + clip_len).resize(width=720).margin(top=top_margin).afx(volumex, VOLUME)
 
         # Build gameplay same length as our clip
         while gp_dur < clip.duration:
