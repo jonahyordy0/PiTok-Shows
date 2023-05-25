@@ -82,6 +82,7 @@ while True:
         clip_len = 65
         vname = "curClip.mp4"
         cname = "#southpark #game #foryou #funny #cartoon.mp4"
+        ACCOUNT_NUM = 4
 
         videos_folder = os.listdir("/media/"+ os.getlogin() +"/"+drives[0]+"/videos")
 
@@ -111,7 +112,7 @@ while True:
                     print("Posting...")
                     # Create next clip and upload
                     cur_video.create_next_clip(clip_len)
-                    upload(cname, 2)
+                    upload(cname, ACCOUNT_NUM)
                     # Set new start point for next clip
                     cur_video.update_info()
 
